@@ -6,7 +6,7 @@ from obstacle import *
 from pygame.locals import *
 
 #Here is the behaviour of the controller
-class Agent:
+class Agent():
     #Main agent constants
     #If you need to create a variable or a data structure, do it here
     speed = 2
@@ -17,6 +17,7 @@ class Agent:
     #Init agent
     def __init__(self):
         self.clock.tick(60)
+        self.action()
 
     #The main agent code
     #Here is the behaviour
@@ -30,7 +31,7 @@ class Agent:
 
         #Set the direction
         direction = keystate[K_RIGHT] - keystate[K_LEFT]
-
+        
         #Take player input
         pygame.display.update()
         if(pressed[pygame.K_UP]):

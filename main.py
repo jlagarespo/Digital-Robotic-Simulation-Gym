@@ -106,7 +106,9 @@ def main(winstyle = 0):
     pygame.time.wait(1000)
     pygame.quit()
 
-    # clear/erase the last drawn sprites
+    while True:
+        agent.action()
+
     all.clear(screen, background)
 
     #update all the sprites
