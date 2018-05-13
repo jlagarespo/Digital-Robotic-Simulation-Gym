@@ -1,45 +1,104 @@
 import pygame
-import random, os.path
+import random
+import time
 
-from player import Player
-from obstacle import *
 from pygame.locals import *
 
-#Here is the behaviour of the controller
+#THE PLAYER
 class Agent():
-    #Main agent constants
-    #If you need to create a variable or a data structure, do it here
-    speed = 2
+    #Init pygame
+    pygame.init()
 
-    player = Player()
+    #Main game constants
+    images = []
+    speed = 20
+    bounce = 24
+    gun_offset = -11
+
+    #Screen objects
+    size = [1000, 500]
+    screen = pygame.display.set_mode(size)
+
+    #Colors
+    orange = (255, 128, 0)
+
+    #Text constants
+    font1 = pygame.font.SysFont("calibri",40)
+
+    #Main clock object
     clock = pygame.time.Clock()
-    
-    #Init agent
-    def __init__(self):
-        self.clock.tick(60)
-        self.action()
 
-    #The main agent code
-    #Here is the behaviour
-    #For example, here is a basic key controlling algorythm.
-    #You can find examples of pre-made codes in the "examples folder"
-    def action(self):
-        pygame.init()
+    #Player constants
+    playerW = 50
+    playerH = 50
 
-        pressed = pygame.key.get_pressed()
-        keystate = pygame.key.get_pressed()
+    #************************#
+    #Robot behaviour
+    #************************#
 
-        #Set the direction
-        direction = keystate[K_RIGHT] - keystate[K_LEFT]
+    def Action(self):
+        print("succsesfully started action iteration")
         
-        #Take player input
+
+    #************************#
+    #Controlling methods
+    #************************#
+
+    #Init player
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+        self.w = 50
+        self.h = 50
+        self.clock.tick(60)
+        self.drawSensor()
+
+    #Draw the player
+    def drawPlayer(self, px, py, pw, ph, pcolor, pwidth):
+        pygame.draw.rect(self.screen, pcolor, [px, py, pw, ph], pwidth)
         pygame.display.update()
-        if(pressed[pygame.K_UP]):
-            self.player.moveUp(self.speed)
-        if(pressed[pygame.K_DOWN]):
-            self.player.moveDown(self.speed)
-        if(pressed[pygame.K_LEFT]):
-            self.player.moveLeft(self.speed)
-        if(pressed[pygame.K_RIGHT]):
-            self.player.moveRight(self.speed)
-        self.player.move(direction)
+
+    #Draw the sensor
+    def drawSensor(self):
+        pygame.draw.line(self.screen, self.orange, [self.x + self.playerW / 2, self.y], [self.x + self.playerW / 2, self.y - 100], 5)
+        pygame.display.update()
+
+    #Repaint on movement
+    def move(self, direction):
+        self.drawPlayer(self.x, self.y, self.playerW, self.playerH, self.orange, 5)
+        pygame.display.update()
+        self.drawSensor()
+        pygame.display.update()
+
+        t = str(self.x) + ", " + str(self.y)
+
+        text = self.font1.render(t, True, (255, 255, 255))
+        self.screen.blit(text, [0, 0])
+        pygame.display.update()
+
+        print(self.x, self.y, self.w, self.h)
+
+    #Set pos of the player
+    def setPos(self, x, y, w, h):
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+        pygame.display.update()
+    
+    #Move stuff
+    def moveUp(self, increment):
+        if self.y > 0:
+            self.setPos(self.x, self.y - increment, self.w, self.h)
+
+    def moveDown(self, increment):
+        if self.y < 500:
+            self.setPos(self.x, self.y + increment, self.w, self.h)
+
+    def moveLeft(self, increment):
+        if self.x > 0:
+            self.setPos(self.x - increment, self.y, self.w, self.h)
+
+    def moveRight(self, increment):
+        if self.x < 1000:
+            self.setPos(self.x + increment, self.y, self.w, self.h)

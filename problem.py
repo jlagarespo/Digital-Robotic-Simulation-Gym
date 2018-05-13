@@ -7,10 +7,8 @@ import random
 import os.path
 
 import pygame
-from player import Player
-from obstacle import Obstacle
+from agent import Agent
 from pygame.locals import *
-from agent import *
 
 #see if we can load more than standard BMP
 if not pygame.image.get_extended():
@@ -25,8 +23,6 @@ main_dir = os.path.split(os.path.abspath(__file__))[0]
 version = "0.14"
 
 agent = Agent()
-player = Player()
-obs = Obstacle()
 
 #Load image
 def load_image(file):
