@@ -24,6 +24,8 @@ version = "0.14"
 
 agent = Agent()
 
+clock = pygame.time.Clock()
+
 #Load image
 def load_image(file):
     "loads an image, prepares it for play"
@@ -81,7 +83,6 @@ def main(winstyle = 0):
     background = pygame.Surface(SCREENRECT.size)
 
     agent.__init__()
-    player.__init__()
 
     #Render the background
     for x in range(0, SCREENRECT.width, bgdtile.get_width()):
@@ -94,7 +95,7 @@ def main(winstyle = 0):
 
     #assign default groups to each sprite class
     all = pygame.sprite.RenderUpdates()
-    player.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
+    agent.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
 
     #Setup the mixer
     if pygame.mixer:
@@ -104,6 +105,7 @@ def main(winstyle = 0):
 
     while True:
         agent.action()
+        clock.tick(60)
 
     all.clear(screen, background)
 

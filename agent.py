@@ -25,9 +25,6 @@ class Agent():
     #Text constants
     font1 = pygame.font.SysFont("calibri",40)
 
-    #Main clock object
-    clock = pygame.time.Clock()
-
     #Player constants
     playerW = 50
     playerH = 50
@@ -36,9 +33,11 @@ class Agent():
     #Robot behaviour
     #************************#
 
-    def Action(self):
+    def action(self):
         print("succsesfully started action iteration")
-        
+        self.drawPlayer(self.x, self.y, self.w, self.h, self.orange, 5)
+        self.drawSensor()
+        self.move(0)
 
     #************************#
     #Controlling methods
@@ -50,7 +49,6 @@ class Agent():
         self.y = 0
         self.w = 50
         self.h = 50
-        self.clock.tick(60)
         self.drawSensor()
 
     #Draw the player
