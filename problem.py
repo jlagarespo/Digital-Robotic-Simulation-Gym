@@ -9,6 +9,7 @@ import os.path
 
 import pygame
 from agent import Agent
+from obstacle import Obstacle
 from pygame.locals import *
 
 #see if we can load more than standard BMP
@@ -22,8 +23,6 @@ print(SCREENRECT.midbottom)
 main_dir = os.path.split(os.path.abspath(__file__))[0]
 
 version = "0.14"
-
-agent = Agent()
 
 clock = pygame.time.Clock()
 
@@ -75,17 +74,22 @@ def main(winstyle = 0):
     bestdepth = pygame.display.mode_ok(SCREENRECT.size, winstyle, 32)
     screen = pygame.display.set_mode(SCREENRECT.size, winstyle, bestdepth)
 
+    #Load images, assign to sprite classes
+    #(do this before the classes are used, after screen setup)
+    img = load_image('player1.gif')
+    imgObstacle = load_image('chimp.bmp')
+    Agent.images = [img, pygame.transform.flip(img, 1, 0)]
+    Obstacle.images = [imgObstacle, pygame.transform.flip(img, 1, 0)]
+
     #decorate the game window
-    pygame.display.set_caption('Digital Robotic Simulation Gym Space', version)
-    print("Caption set to:", 'Digital Robotic Simulation Gym Space', version)
-    pygame.display.set_icon(load_image('chimp.bmp'))
+    icon = pygame.transform.scale(Agent.images[0], (32, 32))
+    pygame.display.set_icon(icon)
+    pygame.display.set_caption('Gym 10.0')
     pygame.mouse.set_visible(0)
 
     #create the background, tile the bgd image
     bgdtile = load_image('background.gif')
     background = pygame.Surface(SCREENRECT.size)
-
-    agent.__init__()
 
     #Render the background
     for x in range(0, SCREENRECT.width, bgdtile.get_width()):
@@ -98,7 +102,46 @@ def main(winstyle = 0):
 
     #assign default groups to each sprite class
     all = pygame.sprite.RenderUpdates()
+    Agent.containers = all
+    Obstacle.containers = all
+    agent = Agent()
+    obstacle = Obstacle()
     agent.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
+    obstacle.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
+
+    while agent.alive():
+        pressed = pygame.key.get_pressed()
+
+        #get input
+        for event in pygame.event.get():
+            if event.type == QUIT or \
+                (event.type == pressed and event.key == K_ESCAPE):
+                    return
+        keystate = pygame.key.get_pressed()
+
+        # clear/erase the last drawn sprites
+        all.clear(screen, background)
+
+        #update all the sprites
+        all.update()
+
+        #handle player input
+        direction = keystate[K_RIGHT] - keystate[K_LEFT]
+
+        speed = 0.05
+        if(pressed[pygame.K_UP]):
+            agent.moveUp(speed)
+        if(pressed[pygame.K_DOWN]):
+            agent.moveDown(speed)
+        if(pressed[pygame.K_LEFT]):
+            agent.moveLeft(speed)
+        if(pressed[pygame.K_RIGHT]):
+            agent.moveRight(speed)
+        agent.move(direction)
+
+        #draw the scene
+        dirty = all.draw(screen)
+        pygame.display.update(dirty)
 
     #Setup the mixer
     if pygame.mixer:
@@ -106,14 +149,5 @@ def main(winstyle = 0):
     pygame.time.wait(1000)
     pygame.quit()
 
-    while True:
-        agent.action()
-        clock.tick(60)
-
-    all.clear(screen, background)
-
-    #update all the sprites
-    all.update()
-
-#Call the "main" function if running this script
-main(0)
+#call the "main" function if running this script
+if __name__ == '__main__': main(0)

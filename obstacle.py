@@ -1,9 +1,9 @@
 import pygame
-
+import random
 
 from pygame.locals import *
 
-class Agent(pygame.sprite.Sprite):
+class Obstacle(pygame.sprite.Sprite):
     images = []
     speed = 20
     bounce = 24
@@ -24,7 +24,9 @@ class Agent(pygame.sprite.Sprite):
         self.origtop = self.rect.top
         self.facing = -1
 
-    def move(self, direction):
+    def draw(self, direction):
+        self.rect = self.rect.clamp(self.screenrect)
+        self.image = self.images[0]
         if direction: self.facing = direction
         self.rect.move_ip(direction * self.speed, 0)
         self.rect = self.rect.clamp(self.screenrect)
