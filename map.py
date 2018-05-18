@@ -8,5 +8,4 @@ class Map():
         self.map = np.zeros((w, h))
 
     def setObstacle(self, x, y):
-        print("Set obstacle")
-        
+        self.map[x, y] = 1
