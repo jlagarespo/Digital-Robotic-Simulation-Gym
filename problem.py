@@ -10,6 +10,7 @@ import os.path
 import pygame
 from agent import Agent
 from obstacle import Obstacle
+from map import Map
 from pygame.locals import *
 
 #see if we can load more than standard BMP
@@ -106,8 +107,12 @@ def main(winstyle = 0):
     Obstacle.containers = all
     agent = Agent()
     obstacle = Obstacle()
+    mp = Map()
     agent.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
     obstacle.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
+
+    x, y = obstacle.getPos()
+    mp.setObstacle(x, y)
 
     while agent.alive():
         pressed = pygame.key.get_pressed()

@@ -62,3 +62,6 @@ class Obstacle(pygame.sprite.Sprite):
 
     def moveRight(self, increment):
         self.setPos(self.x + increment, self.y, self.w, self.h)
+
+    def getPos(self):
+        return self.x, self.y
