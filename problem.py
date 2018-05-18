@@ -1,9 +1,10 @@
 #Digital Robotic Simulation Gym Space
 #Authors: Jacob Lagares and Sergi Valverde
+#Contact at jlagarespo@iebesalu.cat or sergivalverde@gmail.com
 #Started date: Some day in April of 2018
 #Last Release date:??/??/??
 
-import random
+import random   
 import os.path
 
 import pygame
@@ -28,7 +29,7 @@ clock = pygame.time.Clock()
 
 #Load image
 def load_image(file):
-    "loads an image, prepares it for play"
+    print("Loading: " + file + " images")
     file = os.path.join(main_dir, 'data', file)
     try:
         surface = pygame.image.load(file)
@@ -38,6 +39,7 @@ def load_image(file):
 
 #Load image"s"
 def load_images(*files):
+    print("Loading every: " + files + " images")
     imgs = []
     for file in files:
         imgs.append(load_image(file))
@@ -49,6 +51,7 @@ class dummysound:
 
 #♪♫ Load sounds like music ♪♫
 def load_sound(file):
+    print("Loading: " + file + " sound")
     if not pygame.mixer: return dummysound()
     file = os.path.join(main_dir, 'data', file)
     try:

@@ -23,7 +23,7 @@ class Agent():
     orange = (255, 128, 0)
 
     #Text constants
-    font1 = pygame.font.SysFont("calibri",40)
+    font1 = pygame.font.SysFont("calibri", 40)
 
     #Player constants
     playerW = 50
@@ -35,8 +35,6 @@ class Agent():
 
     def action(self):
         print("succsesfully started action iteration")
-        self.drawPlayer(self.x, self.y, self.w, self.h, self.orange, 5)
-        self.drawSensor()
         self.move(0)
 
     #************************#
