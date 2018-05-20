@@ -10,7 +10,7 @@ import os.path
 import pygame
 from agent import Agent
 from obstacle import Obstacle
-from map import Map
+from problemMap import ProblemMap
 from pygame.locals import *
 
 #see if we can load more than standard BMP
@@ -45,7 +45,7 @@ def load_images(*files):
         imgs.append(load_image(file))
     return imgs
 
-#Irrelevent stuff
+#Dummy sound manager
 class dummysound:
     def play(self): pass
 
@@ -107,11 +107,12 @@ def main(winstyle = 0):
     Obstacle.containers = all
     agent = Agent()
     obstacle = Obstacle()
-    mp = Map()
+    mp = ProblemMap()
     agent.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
     obstacle.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
 
     x, y = obstacle.getPos()
+    mp.setMapSize(SCREENRECT.width, SCREENRECT.height)
     mp.setObstacle(x, y)
 
     while agent.alive():

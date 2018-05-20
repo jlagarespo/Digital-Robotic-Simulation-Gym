@@ -15,13 +15,15 @@ class Agent(pygame.sprite.Sprite):
         self.image = self.images[0]
         self.x = 0
         self.y = 0
-        self.w = 0
-        self.h = 0
+        self.w = self.images[0].get_rect().w
+        self.h = self.images[0].get_rect().h
         self.screenrect = Rect(self.x, self.y, self.w, self.h)
         self.rect = self.image.get_rect(midbottom=self.screenrect.midbottom)
         self.reloading = 0
         self.origtop = self.rect.top
         self.facing = -1
+
+        print(self.w, self.h)
 
     def move(self, direction):
         if direction: self.facing = direction
