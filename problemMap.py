@@ -9,7 +9,7 @@ class ProblemMap():
         self.w = w
         self.h = h
     
-        self.map = np.zeros(np.newaxis())
+        self.map = np.zeros(self.w, self.h)
 
     def setObstacle(self, x, y):
         self.map[x, y] = 1
