@@ -44,14 +44,14 @@ If you get this output:
 Sorry, extended image module required
 ```
 Make sure you have an extension to load more than a standart Bitmap.
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 Also, if something goes wrong, make sure you don't have this message:
 ```
 Could not load image "image"
 ```
 Make sure the "image" exists.
 Recomended to re-clone the repository in this case.
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 If no sound is playing, is possible to be because:
 ```
 Warnign, no sound
