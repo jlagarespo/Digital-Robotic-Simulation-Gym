@@ -38,18 +38,21 @@ Then, you should see something like this:
 ![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/main_window.png)
 If you see it, sucsses! Your done it; now you can start creating your own agent behaviours and experimenting by yourself.
 
-####Common issues
+#### Common issues
+If you get this output:
 ```
 Sorry, extended image module required
 ```
 Make sure you have an extension to load more than a standart Bitmap.
 ________________________________________________________________________________
+Also, if something goes wrong, make sure you don't have this message:
 ```
 Could not load image "image"
 ```
 Make sure the "image" exists.
 Recomended to re-clone the repository in this case.
 ________________________________________________________________________________
+If no sound is playing, is possible to be because:
 ```
 Warnign, no sound
 ```
@@ -58,7 +61,7 @@ or
 Warning, unable to load, "sound"
 ```
 Everything should work nice, except the sound engine.
-Also recomended to re-clone the repository
+Also recomended to re-clone the repository.
 
 #### Main code workflow
 When you want to make changes to the code for changing the behaviour of the program, you have to know a couple of things:
