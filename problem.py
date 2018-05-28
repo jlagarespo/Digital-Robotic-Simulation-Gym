@@ -26,7 +26,7 @@ main_dir = os.path.split(os.path.abspath(__file__))[0]
 version = "0.14"
 
 clock = pygame.time.Clock()
-ms
+
 #Load image
 def load_image(file):
     print("Loading: " + file + " images")
