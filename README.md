@@ -81,4 +81,6 @@ Is the obstacle not recommended to change it.
 Use the Player class methods of movement and obstacle detection to controll the behaviour of the robot what you can write inside this class.
 *More info going to be here**
 
+### Thank you for looking here around! We hope you enjoy this! :)
+
 ![alt text](https://avatars2.githubusercontent.com/u/26935885?s=40&v=4)   **Jacob Lagares Pozo && Sergi Valverde**   ![alt text](https://avatars1.githubusercontent.com/u/5285442?s=60&v=4)
