@@ -19,9 +19,9 @@ https://conda.io/
 This system was designed to simulate a microcontroller what recives orders and then executes them(like move up, move right etc.).
 This allows us to test complex AI algorythms without a real robot, such as simple programmed algorythms(look at the examples
 directory) to complex mathematical solutions to certain problems in the agent behaviour.
-
+________________________________________________________________________________
 ## stuff what needs to be writed by the notes we have in the real world
-
+________________________________________________________________________________
 #### How to install and use it
 First you need to clone the repository into your computer.
 For doing that, you can execute this command:
@@ -37,21 +37,21 @@ Instead of running this command everytime you want to execute the program, you c
 Then, you should see something like this:
 ![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/main_window.png)
 If you see it, sucsses! Your done it; now you can start creating your own agent behaviours and experimenting by yourself.
-
+________________________________________________________________________________
 #### Common issues
 If you get this output:
 ```
 Sorry, extended image module required
 ```
 Make sure you have an extension to load more than a standart Bitmap.
-________________________________________________________________________________
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Also, if something goes wrong, make sure you don't have this message:
 ```
 Could not load image "image"
 ```
 Make sure the "image" exists.
 Recomended to re-clone the repository in this case.
-________________________________________________________________________________
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 If no sound is playing, is possible to be because:
 ```
 Warnign, no sound
@@ -62,7 +62,7 @@ Warning, unable to load, "sound"
 ```
 Everything should work nice, except the sound engine.
 Also recomended to re-clone the repository.
-
+________________________________________________________________________________
 #### Main code workflow
 When you want to make changes to the code for changing the behaviour of the program, you have to know a couple of things:
 
