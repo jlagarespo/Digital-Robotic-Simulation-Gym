@@ -111,9 +111,9 @@ def main(winstyle = 0):
     agent.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
     obstacle.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
 
-    x, y = obstacle.getPos()
+    x, y = obstacle.getX(), obstacle.getY()
     mp.setMapSize(SCREENRECT.width, SCREENRECT.height)
-    mp.setObstacle(x, y)
+    mp.setObstacle(obstacle.getX(), obstacle.getY(), obstacle.getW(), obstacle.getH())
 
     while agent.alive():
         pressed = pygame.key.get_pressed()
@@ -124,6 +124,11 @@ def main(winstyle = 0):
                 (event.type == pressed and event.key == K_ESCAPE):
                     return
         keystate = pygame.key.get_pressed()
+
+        if mp.getMap(agent.x, agent.y) == 1:
+            agent.setObstacle(True)
+        else:
+            agent.setObstacle(False)
 
         # clear/erase the last drawn sprites
         all.clear(screen, background)

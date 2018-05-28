@@ -8,6 +8,8 @@ class Agent(pygame.sprite.Sprite):
     bounce = 24
     gun_offset = -11
 
+    obstacle = False
+
     def __init__(self):
         #Init stuff
         pygame.sprite.Sprite.__init__(self, self.containers)
@@ -35,6 +37,11 @@ class Agent(pygame.sprite.Sprite):
             self.image = self.images[1]
         self.rect.top = self.origtop - (self.rect.left//self.bounce%2)
 
+        if(self.obstacle == True):
+            pygame.display.set_caption("!")
+        else:
+            pygame.display.set_caption("No")
+
     def gunpos(self):
         pos = self.facing*self.gun_offset + self.rect.centerx
         return pos, self.rect.top
@@ -61,3 +68,6 @@ class Agent(pygame.sprite.Sprite):
 
     def moveRight(self, increment):
         self.setPos(self.x + increment, self.y, self.w, self.h)
+
+    def setObstacle(self, arg):
+        obstacle = arg
