@@ -71,13 +71,11 @@ When you want to make changes to the code for changing the behaviour of the prog
     -Also, is not recomended to change the "draw" methods, because he is the ones what draw stuff on the screen.
 
 Then you need to know what there is a few main classes:
-###### The main.py file contains no classes, but in it there is the main methods
-###### The player.py contains only one class
-* The Player class has got the main drawing and basic moving methods methods. Using this methods from the Agent class is what does the player move. Not recomended to modify.
-###### The obstacle.py file contains also one class
-* This file is work in progress so for the moment I can't give more Info.
-###### The agent.py file
-* As the obstacle class, this class still WIP, and it does all the program to go bad. So when finished we going to tell here how to create your own agent behaviours.
+##### The problem.py class
+Contains the problem to resolve, and the object creation
+
+#### For the obstacle.py
+Is the obstacle not recommended to change it.
 
 #### For making changes on the agent.py
 Use the Player class methods of movement and obstacle detection to controll the behaviour of the robot what you can write inside this class.
