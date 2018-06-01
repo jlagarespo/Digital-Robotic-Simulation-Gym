@@ -8,7 +8,7 @@ class Agent(pygame.sprite.Sprite):
     bounce = 24
     gun_offset = -11
 
-    def __init__(self):
+    def __init__(self, sensorW, sensorH, step):
         #Init stuff
         pygame.sprite.Sprite.__init__(self, self.containers)
         #Set basic constants
@@ -23,8 +23,9 @@ class Agent(pygame.sprite.Sprite):
         self.origtop = self.rect.top
         self.facing = -1
         self.sensorMap = None
-        self.sensorW = 30
-        self.sensorH = 30
+        self.sensorW = sensorW
+        self.sensorH = sensorH
+        self.step = step
 
         print(self.w, self.h)
 
@@ -65,8 +66,28 @@ class Agent(pygame.sprite.Sprite):
         self.sensorMap = data
         # print(data)
 
+    def getSensorSize(self):
+        return self.sensorW , self.sensorH
+
     def getPos(self):
         return self.x, self.y
     
     def getSize(self):
         return self.w, self.h
+
+    def nextState(self):
+        pressed = pygame.key.get_pressed()
+
+        for event in pygame.event.get():
+            if event.type == pygame.KEYUP:
+                if event.key == K_UP:
+                    self.moveUp(self.step)
+            if event.type == pygame.KEYUP:
+                if event.key == K_DOWN:
+                    self.moveDown(self.step)
+            if event.type == pygame.KEYUP:
+                if event.key == K_LEFT:
+                    self.moveLeft(self.step)
+            if event.type == pygame.KEYUP:
+                if event.key == K_RIGHT:
+                    self.moveRight(self.step)

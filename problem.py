@@ -1,24 +1,46 @@
-#Digital Robotic Simulation Gym Space
-#Authors: Jacob Lagares and Sergi Valverde
-#Contact at jlagarespo@iebesalu.cat or sergivalverde@gmail.com
-#Started date: Some day in April of 2018
-#Last Release date:??/??/??
+# Digital Robotic Simulation Gym Space
+# Authors: Jacob Lagares and Sergi Valverde
+# Contact at jlagarespo@iebesalu.cat or sergivalverde@gmail.com
+# Started date: Some day in April of 2018
+# Last Release date:??/??/??
 
-import random   
 import os.path
+import random
+import time
 
 import pygame
+from pygame.locals import *
+
 from agent import Agent
 from obstacle import Obstacle
 from problemMap import ProblemMap
-from pygame.locals import *
 
-#see if we can load more than standard BMP
+# *********************************************************
+
+# problem variables
+problemW  = 1000
+problemH = 500
+
+# obstacle
+obsPosX = problemW / 2
+obsPosY = problemH / 2
+
+# agent
+agentPosX = obsPosX - 50
+agentPosY = obsPosY - 50
+sensorW = 30
+sensorH = 30
+step = 10
+
+# *********************************************************
+
+
+# see if we can load more than standard BMP
 if not pygame.image.get_extended():
     raise SystemExit("Sorry, extended image module required")
 
-#Get he rect of the screen
-SCREENRECT = Rect(0, 0, 1000, 500)
+# Get he rect of the screen
+SCREENRECT = Rect(0, 0, problemW, problemH)
 print(SCREENRECT.midbottom)
 
 main_dir = os.path.split(os.path.abspath(__file__))[0]
@@ -27,7 +49,7 @@ version = "0.14"
 
 clock = pygame.time.Clock()
 
-#Load image
+# Load image
 def load_image(file):
     print("Loading: " + file + " images")
     file = os.path.join(main_dir, 'data', file)
@@ -37,7 +59,7 @@ def load_image(file):
         raise SystemExit('Could not load image "%s" %s'%(file, pygame.get_error()))
     return surface.convert()
 
-#Load image"s"
+# Load image"s"
 def load_images(*files):
     print("Loading every: " + files + " images")
     imgs = []
@@ -45,11 +67,11 @@ def load_images(*files):
         imgs.append(load_image(file))
     return imgs
 
-#Dummy sound manager
+# Dummy sound manager
 class dummysound:
     def play(self): pass
 
-#♪♫ Load sounds like music ♪♫
+# ♪♫ Load sounds like music ♪♫
 def load_sound(file):
     print("Loading: " + file + " sound")
     if not pygame.mixer: return dummysound()
@@ -61,8 +83,21 @@ def load_sound(file):
         print ('Warning, unable to load, %s' % file)
     return dummysound()
 
-#Main stuff
-def main(winstyle = 0):
+# Main stuff
+def main(winstyle = 0):# problem variables
+    global problemW
+    global problemH
+
+    # obstacle
+    global obsPosX
+    global obsPosY
+
+    # agent
+    global agentPosX
+    global agentPosY
+    global sensorW
+    global sensorH
+    global step
     # Initialize pygame
     pygame.init()
 
@@ -70,46 +105,47 @@ def main(winstyle = 0):
         print ('Warning, no sound')
         pygame.mixer = None
 
-    #Set the display mode
-    winstyle = 0  #FULLSCREEN
+    # Set the display mode
+    winstyle = 0  # FULLSCREEN
     bestdepth = pygame.display.mode_ok(SCREENRECT.size, winstyle, 32)
     screen = pygame.display.set_mode(SCREENRECT.size, winstyle, bestdepth)
 
-    #Load images, assign to sprite classes
-    #(do this before the classes are used, after screen setup)
+    # Load images, assign to sprite classes
+    # (do this before the classes are used, after screen setup)
     img = load_image('player1.gif')
     imgObstacle = load_image('chimp.bmp')
     Agent.images = [img, pygame.transform.flip(img, 1, 0)]
     Obstacle.images = [imgObstacle, pygame.transform.flip(img, 1, 0)]
 
-    #decorate the game window
+    # decorate the game window
     icon = pygame.transform.scale(Agent.images[0], (32, 32))
     pygame.display.set_icon(icon)
     pygame.display.set_caption('Gym 10.0')
     pygame.mouse.set_visible(0)
 
-    #create the background, tile the bgd image
+    # create the background, tile the bgd image
     bgdtile = load_image('background.gif')
     background = pygame.Surface(SCREENRECT.size)
 
-    #Render the background
+    # Render the background
     for x in range(0, SCREENRECT.width, bgdtile.get_width()):
         for y in range(0, SCREENRECT.height, bgdtile.get_height()):
             background.blit(bgdtile, (x, y))
     
-    #Blit the background
+    # Blit the background
     screen.blit(background, (0,0))
     pygame.display.flip()
 
-    #assign default groups to each sprite class
+    # assign default groups to each sprite class
     all = pygame.sprite.RenderUpdates()
     Agent.containers = all
     Obstacle.containers = all
-    agent = Agent()
+    
+    agent = Agent(sensorW, sensorH, step)
     obstacle = Obstacle()
     mp = ProblemMap()
-    agent.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
-    obstacle.setPos(SCREENRECT.width / 2, SCREENRECT.height / 2, 10, 10)
+    agent.setPos(agentPosX, agentPosY, 10, 10)
+    obstacle.setPos(obsPosX, obsPosY, 10, 10)
 
     x, y = obstacle.getX(), obstacle.getY()
     mp.setMapSize(SCREENRECT.width, SCREENRECT.height)
@@ -125,50 +161,45 @@ def main(winstyle = 0):
             if event.type == pygame.KEYUP:
                 if event.key==K_ESCAPE:
                     exit()
-            if event.type == pygame.KEYUP:
-                if event.key==K_UP:
-                    agent.moveUp(5)
-                    agent.move(direction)
-            if event.type == pygame.KEYUP:
-                if event.key==K_DOWN:
-                    agent.moveDown(5)
-                    agent.move(direction)
-            if event.type == pygame.KEYUP:
-                if event.key==K_LEFT:
-                    agent.moveLeft(5)
-                    agent.move(direction)
-            if event.type == pygame.KEYUP:
-                if event.key==K_RIGHT:
-                    agent.moveRight(5)
-                    agent.move(direction)
+
         keystate = pygame.key.get_pressed()
         
+        # update next state
+
         agentPosX, agentPosY = agent.getPos()
         agentW, agentH = agent.getSize()
         nextSensor = mp.getMap(agentPosX, agentPosY, agentW, agentH)
-        print("position:", agentPosX, agentPosY, agentW, agentH)
-        print("nextSensor:", nextSensor)
+        # print("position:", agentPosX, agentPosY, agentW, agentH)
+        # print("nextSensor:", nextSensor)
         agent.getSensor(nextSensor)
+        
+        # next state
+        agent.nextState()
+
+        if 1 in nextSensor:
+            print("Agent messed up :(")
+            time.sleep(2)
+            exit()
 
         # clear/erase the last drawn sprites
         all.clear(screen, background)
 
-        #update all the sprites
+        # update all the sprites
         all.update()
 
-        #handle player input
+        # handle player input
         direction = keystate[K_RIGHT] - keystate[K_LEFT]
         
 
-        #draw the scene
+        # draw the scene
         dirty = all.draw(screen)
         pygame.display.update(dirty)
 
-    #Setup the mixer
+    # Setup the mixer
     if pygame.mixer:
         pygame.mixer.music.fadeout(1000)
     pygame.time.wait(1000)
     pygame.quit()
 
-#call the "main" function if running this script
+# call the "main" function if running this script
 if __name__ == '__main__': main(0)
