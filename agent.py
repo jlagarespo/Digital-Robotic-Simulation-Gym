@@ -8,8 +8,6 @@ class Agent(pygame.sprite.Sprite):
     bounce = 24
     gun_offset = -11
 
-    obstacle = False
-
     def __init__(self):
         #Init stuff
         pygame.sprite.Sprite.__init__(self, self.containers)
@@ -24,6 +22,9 @@ class Agent(pygame.sprite.Sprite):
         self.reloading = 0
         self.origtop = self.rect.top
         self.facing = -1
+        self.sensorMap = None
+        self.sensorW = 30
+        self.sensorH = 30
 
         print(self.w, self.h)
 
@@ -35,16 +36,7 @@ class Agent(pygame.sprite.Sprite):
             self.image = self.images[0]
         elif direction > 0:
             self.image = self.images[1]
-        self.rect.top = self.origtop - (self.rect.left//self.bounce%2)
-
-        if(self.obstacle == True):
-            pygame.display.set_caption("!")
-        else:
-            pygame.display.set_caption("No")
-
-    def gunpos(self):
-        pos = self.facing*self.gun_offset + self.rect.centerx
-        return pos, self.rect.top
+        self.rect.top = self.origtop - (self.rect.left//self.bounce%2) 
 
     def setPos(self, x, y, w, h):
         self.screenrect = Rect(x, y, w, h)
@@ -69,5 +61,12 @@ class Agent(pygame.sprite.Sprite):
     def moveRight(self, increment):
         self.setPos(self.x + increment, self.y, self.w, self.h)
 
-    def setObstacle(self, arg):
-        obstacle = arg
+    def getSensor(self, data):
+        self.sensorMap = data
+        # print(data)
+
+    def getPos(self):
+        return self.x, self.y
+    
+    def getSize(self):
+        return self.w, self.h

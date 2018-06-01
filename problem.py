@@ -114,21 +114,41 @@ def main(winstyle = 0):
     x, y = obstacle.getX(), obstacle.getY()
     mp.setMapSize(SCREENRECT.width, SCREENRECT.height)
     mp.setObstacle(obstacle.getX(), obstacle.getY(), obstacle.getW(), obstacle.getH())
+    print(mp.getSize())
 
     while agent.alive():
         pressed = pygame.key.get_pressed()
 
-        #get input
+        # get input
         for event in pygame.event.get():
-            if event.type == QUIT or \
-                (event.type == pressed and event.key == K_ESCAPE):
-                    return
+        # test events, set key states
+            if event.type == pygame.KEYUP:
+                if event.key==K_ESCAPE:
+                    exit()
+            if event.type == pygame.KEYUP:
+                if event.key==K_UP:
+                    agent.moveUp(5)
+                    agent.move(direction)
+            if event.type == pygame.KEYUP:
+                if event.key==K_DOWN:
+                    agent.moveDown(5)
+                    agent.move(direction)
+            if event.type == pygame.KEYUP:
+                if event.key==K_LEFT:
+                    agent.moveLeft(5)
+                    agent.move(direction)
+            if event.type == pygame.KEYUP:
+                if event.key==K_RIGHT:
+                    agent.moveRight(5)
+                    agent.move(direction)
         keystate = pygame.key.get_pressed()
-
-        if mp.getMap(agent.x, agent.y) == 1:
-            agent.setObstacle(True)
-        else:
-            agent.setObstacle(False)
+        
+        agentPosX, agentPosY = agent.getPos()
+        agentW, agentH = agent.getSize()
+        nextSensor = mp.getMap(agentPosX, agentPosY, agentW, agentH)
+        print("position:", agentPosX, agentPosY, agentW, agentH)
+        print("nextSensor:", nextSensor)
+        agent.getSensor(nextSensor)
 
         # clear/erase the last drawn sprites
         all.clear(screen, background)
@@ -138,17 +158,7 @@ def main(winstyle = 0):
 
         #handle player input
         direction = keystate[K_RIGHT] - keystate[K_LEFT]
-
-        speed = 0.05
-        if(pressed[pygame.K_UP]):
-            agent.moveUp(speed)
-        if(pressed[pygame.K_DOWN]):
-            agent.moveDown(speed)
-        if(pressed[pygame.K_LEFT]):
-            agent.moveLeft(speed)
-        if(pressed[pygame.K_RIGHT]):
-            agent.moveRight(speed)
-        agent.move(direction)
+        
 
         #draw the scene
         dirty = all.draw(screen)
