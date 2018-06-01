@@ -36,6 +36,8 @@ Instead of running this command everytime you want to execute the program, you c
 
 Then, you should see something like this:
 ![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/main_window.png)
+Also your console, should look like this:
+![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/console.png)
 If you see it, sucsses! Your done it; now you can start creating your own agent behaviours and experimenting by yourself.
 ________________________________________________________________________________
 #### Common issues
