@@ -8,12 +8,20 @@ class ProblemMap():
         self.h = None
 
         self.map = None
-
+    
     def setMapSize(self, w, h):
+        '''
+        Generate a zero map with of size w, h.
+        We fill the borders with ones.
+        '''
+
         self.w = w
         self.h = h
 
-        self.map = np.zeros((w, h))
+        # set a full map
+        self.map = np.ones((w, h))
+        # fill interior with zeros
+        self.map[1:w - 1, 1:h - 1] = 0
         # print(self.map.shape)
 
     def setObstacle(self, x, y, w, h):
