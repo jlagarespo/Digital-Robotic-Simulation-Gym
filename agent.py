@@ -4,9 +4,11 @@ from pygame.locals import *
 
 class Agent(pygame.sprite.Sprite):
     """
-    Class agent
+    Class Agent
 
-    to comment
+    This is the simulation controller. Like a robot.
+    Its controlled from the brain.py class what inherits this.
+    Don't recommended to touch!
 
     """
     images = []
@@ -35,6 +37,9 @@ class Agent(pygame.sprite.Sprite):
         print(self.w, self.h)
 
     def move(self, direction):
+        """
+        Update the player location and iterate properties
+        """
         if direction:
             self.facing = direction
         self.rect.move_ip(direction * self.speed, 0)
@@ -46,6 +51,9 @@ class Agent(pygame.sprite.Sprite):
         self.rect.top = self.origtop - (self.rect.left//self.bounce % 2)
 
     def setPos(self, x, y, w, h):
+        """
+        Sets player position
+        """
         self.screenrect = Rect(x, y, w, h)
         self.rect = self.image.get_rect(midbottom=self.screenrect.midbottom)
         self.reloading = 0
@@ -57,26 +65,50 @@ class Agent(pygame.sprite.Sprite):
         self.h = h
 
     def moveUp(self, increment):
+        """
+        Displace the player up
+        """
         self.setPos(self.x, self.y - increment, self.w, self.h)
 
     def moveDown(self, increment):
+        """
+        Displace the player down
+        """
         self.setPos(self.x, self.y + increment, self.w, self.h)
 
     def moveLeft(self, increment):
+        """
+        Displace the player left
+        """
         self.setPos(self.x - increment, self.y, self.w, self.h)
 
     def moveRight(self, increment):
+        """
+        Displace the player right
+        """
         self.setPos(self.x + increment, self.y, self.w, self.h)
 
     def getSensor(self, data):
+        """
+        Loads the sensor data into the agent class
+        """
         self.sensorMap = data
         # print(data)
 
     def getSensorSize(self):
+        """
+        Gets the size of the sensor
+        """
         return self.sensorW, self.sensorH
 
     def getPos(self):
+        """
+        Gets the agent location
+        """
         return self.x, self.y
 
     def getSize(self):
+        """
+        Gets the agent size
+        """
         return self.w, self.h

@@ -3,7 +3,9 @@ import numpy as np
 
 class ProblemMap():
     """
-    to doc
+    Class Map
+
+    The abstract map what determines where is what. Using a fragment of it as agent eyes.
     """
     def __init__(self):
         # Init stuff
@@ -29,6 +31,9 @@ class ProblemMap():
         # print(self.map.shape)
 
     def setObstacle(self, x, y, w, h):
+        """
+        Sets obstacle location in the map
+        """
         self.map[int(x):int(x + w), int(y):int(y + h)] = 1
 
     def getMap(self, x, y, w, h):

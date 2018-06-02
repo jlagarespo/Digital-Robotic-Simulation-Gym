@@ -7,7 +7,7 @@ class Brain(Agent):
     Class Brain
 
     The Brain class inherits the Agent class. We use it to implement
-    our navigation algorithms. See agent.py to see the available methods
+    our navigation algorithms. See agent.py to see the available methods.
 
     """
     def __init__(self, w, h, step):
