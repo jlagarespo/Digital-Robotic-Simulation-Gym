@@ -203,3 +203,4 @@ def main(winstyle = 0):# problem variables
 
 # call the "main" function if running this script
 if __name__ == '__main__': main(0)
+print("easter egg")
