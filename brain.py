@@ -23,17 +23,17 @@ class Brain(Agent):
         moveLeft, moveRight
         """
 
-        '''
+        
         sensor_data = self.sensorMap
         step = 5
 
-        print "DEBUG sensor magnitude:", np.sum(sensor_data)
+        print("DEBUG sensor magnitude:", np.sum(sensor_data))
         if np.sum(sensor_data) == 0:
             orientation = self.prev_orientation
             step = 10
         else:
             orientation = self.get_best_orientation(sensor_data)
-            print "BEST OR", orientation
+            print("BEST OR", orientation)
             self.prev_orientation = orientation
             step = 30
 
@@ -59,7 +59,7 @@ class Brain(Agent):
         if orientation == 8:
             self.moveDown(step)
             self.moveRight(step)
-        '''
+        
 
     def get_best_orientation(self, sensor_map):
         """
@@ -79,9 +79,9 @@ class Brain(Agent):
 
         """
 
-        '''
+        
         # build the orientation mask:
-        # NOTE: thi should be built into a separated method and
+        # NOTE: this should be built into a separated method and
         # only be called once :)
         sensor_mask = np.zeros_like(sensor_map)
         x_size = sensor_mask.shape[0]
@@ -89,8 +89,8 @@ class Brain(Agent):
         x_int = int(x_size / 3)
         y_int = int(y_size / 3)
 
-        print sensor_map.shape
-        print x_int
+        print(sensor_map.shape)
+        print(x_int)
         sensor_mask[0:x_int, 0:y_int] = 1
         sensor_mask[0:x_int, y_int:y_int*2] = 2
         sensor_mask[0:x_int, y_int*2:y_int*3] = 3
@@ -100,8 +100,8 @@ class Brain(Agent):
         sensor_mask[x_int*2:x_int*3, y_int:y_int*2] = 7
         sensor_mask[x_int*2:x_int*3, y_int*2:y_int*3] = 8
 
-        print sensor_map
-        print sensor_mask
+        print(sensor_map)
+        print(sensor_mask)
         # check the best orientation
         best_loss = np.Inf
         best_orientation = 0
@@ -110,8 +110,9 @@ class Brain(Agent):
             if loss < best_loss:
                 best_orientation = i
                 best_loss = loss
-            print loss,
-        print best_orientation, best_loss
+            print(loss)
+        print(best_orientation)
+        print(best_loss)
         exit()
         return best_orientation
-        '''
+        
