@@ -14,7 +14,6 @@ class ProblemMap():
         self.map = None
     
     def setMapSize(self, w, h):
-<<<<<<< HEAD
         '''
         Generate a zero map with of size w, h.
         We fill the borders with ones.
@@ -28,26 +27,6 @@ class ProblemMap():
         # fill interior with zeros
         self.map[1:w - 1, 1:h - 1] = 0
         # print(self.map.shape)
-=======
-        """
-        Build a map with size w, h
-        The map is initialized with zeros. Obtacles and borders
-        are filled with ones on the map
-        """
-        self.w = w
-        self.h = h
-
-        # build the map
-        self.map = np.ones((w, h)) * 3
-        self.map[1:w-1, 1:h-1] = 0
-
-    def setGoal(self, x, y, w, h):
-        """
-        Goal to reach.
-        This element is filled with 2 on the map.
-        """
-        self.map[int(x):int(x + w), int(y):int(y + h)] = 2
->>>>>>> f84ea20ddd35db40b859b99c3b20e65b6d2787af
 
     def setObstacle(self, x, y, w, h):
         self.map[int(x):int(x + w), int(y):int(y + h)] = 1

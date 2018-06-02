@@ -154,11 +154,6 @@ while agent.alive():
             if event.key == K_ESCAPE:
                 exit()
 
-<<<<<<< HEAD
 # call the "main" function if running this script
 if __name__ == '__main__': main(0)
 
-=======
-pygame.time.wait(1000)
-pygame.quit()
->>>>>>> f84ea20ddd35db40b859b99c3b20e65b6d2787af
