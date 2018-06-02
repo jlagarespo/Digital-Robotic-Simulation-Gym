@@ -169,4 +169,9 @@ while agent.alive():
             if event.key == K_ESCAPE:
                 exit()
             if event.key == K_r:
-                # Reset code
+                #Reset game
+                print("reset")
+
+# call the "main" function if running this script
+if __name__ == '__main__': main(0)
+
