@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class ProblemMap():
     """
     Class Map
@@ -14,6 +13,8 @@ class ProblemMap():
         self.h = None
 
         self.map = None
+
+# *********************************************************
     
     def setMapSize(self, w, h):
         '''

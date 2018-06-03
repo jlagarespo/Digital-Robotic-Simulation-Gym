@@ -24,8 +24,8 @@ import pygame
 from pygame.locals import *
 
 from brain import Brain as Agent
-from obstacle import Obstacle
-from problemMap import ProblemMap
+from obstacle import Obstacle as Obstacle
+from problemMap import ProblemMap as ProblemMap
 
 # *********************************************************
 # problem variables
@@ -56,11 +56,14 @@ SCREENRECT = Rect(0, 0, problemW, problemH)
 main_dir = os.path.split(os.path.abspath(__file__))[0]
 clock = pygame.time.Clock()
 
+# *********************************************************
 
 # Load image
 def load_image(file):
     print("Loading: " + file + " images")
+
     file = os.path.join(main_dir, 'data', file)
+
     try:
         surface = pygame.image.load(file)
     except pygame.error:
@@ -71,11 +74,14 @@ def load_image(file):
 # Load image"s"
 def load_images(*files):
     print("Loading every: " + files + " images")
+
     imgs = []
+
     for file in files:
         imgs.append(load_image(file))
     return imgs
 
+# *********************************************************
 
 # Initialize pygame
 pygame.init()
@@ -101,6 +107,8 @@ pygame.mouse.set_visible(0)
 # create the background, tile the bgd image
 bgdtile = load_image('background.gif')
 background = pygame.Surface(SCREENRECT.size)
+
+# *********************************************************
 
 # Render the background
 for x in range(0, SCREENRECT.width, bgdtile.get_width()):
@@ -137,8 +145,9 @@ print(mp.getSize())
 sensor_w, sensor_h = agent.getSensorSize()
 agent_w, agent_h = agent.getSize()
 
-while agent.alive():
+# *********************************************************
 
+while agent.alive():
     # get current state
     agentPosX, agentPosY = agent.getPos()
     sensor_info = mp.getMap(agentPosX, agentPosY, sensor_w, sensor_h)
@@ -171,6 +180,8 @@ while agent.alive():
             if event.key == K_r:
                 #Reset game
                 print("reset")
+
+# *********************************************************
 
 # call the "main" function if running this script
 if __name__ == '__main__': main(0)

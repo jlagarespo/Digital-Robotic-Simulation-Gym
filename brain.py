@@ -1,7 +1,6 @@
 from agent import Agent
 import numpy as np
 
-
 class Brain(Agent):
     """
     Class Brain
@@ -13,6 +12,10 @@ class Brain(Agent):
     def __init__(self, w, h, step):
         Agent.__init__(self, w, h, step)
         self.prev_orientation = 0
+
+    # *********************************************************
+    # Behaviour controller
+    # *********************************************************
 
     def nextState(self):
         """
