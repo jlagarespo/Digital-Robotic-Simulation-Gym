@@ -27,6 +27,8 @@ R      - reset everything
 
 import os.path
 import pygame
+import numpy as np
+
 from pygame.locals import *
 
 from brain import Brain as Agent
@@ -49,12 +51,12 @@ obsPosX = problemW / 2
 obsPosY = problemH / 2
 
 # agent
-agentPosX = 50
-agentPosY = 50
+agentPosX = 100
+agentPosY = problemH / 2
 
-sensorW = 70
-sensorH = 70
-step = 20
+sensorW = 60
+sensorH = 60
+step = 5
 
 # *********************************************************
 
@@ -153,20 +155,28 @@ print(mp.getSize())
 # while it's finding the goal. If it touches an obstacle
 # the game is finished
 
-sensor_w, sensor_h = agent.getSensorSize()
 agent_w, agent_h = agent.getSize()
+
+print(agent_w, agent_h)
+
+if agent_w > sensorW:
+    print("Agent too big!")
+    exit()
+if agent_h > sensorH:
+    print("Agent too big!")
+    exit()
 
 # *********************************************************
 
 while agent.alive():
     # get current state
     agentPosX, agentPosY = agent.getPos()
-    sensor_info = mp.getMap(agentPosX, agentPosY, sensor_w, sensor_h)
+    sensor_info = mp.getMap(agentPosX - sensorW / 2, agentPosY - sensorH / 2, sensorW, sensorH)
 
     # evaluate the agent position
     # if the agent is touching one of the obstacles, stop
     # the problem. If still alive, get sensory information and move
-    if mp.evaluate_map(agentPosX, agentPosY, agent_w, agent_h):
+    if mp.evaluate_map(agentPosX, agentPosY, agent_w, agent_h, 5):
         print("Agent messed up :(")
         pygame.time.wait(2000)
         pygame.quit()

@@ -44,13 +44,13 @@ class ProblemMap():
         system. The reference system is taken from the center of the
         agent
         """
-        return self.map[int(x - (w / 2.0)):int(x + (w / 2.0)), int(y):int(y + h)]
+        return self.map[int(x):int(x + w), int(y):int(y + h)]
 
 
     def getSize(self):
         return self.w, self.h
 
-    def evaluate_map(self, x, y, w, h):
+    def evaluate_map(self, x, y, w, h, min_res):
         """
         evaluate the current agent position
         Return True if the agent is overlapping one of
@@ -60,5 +60,5 @@ class ProblemMap():
         respectively.
         """
 
-        return np.sum(self.map[int(x):int(x + w), int(y):int(y + h)] == 1) > 10
+        return np.sum(self.map[int(x):int(x + w), int(y):int(y + h)] == 1) > min_res
 #END#
