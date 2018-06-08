@@ -60,3 +60,4 @@ class ProblemMap():
         """
 
         return np.sum(self.map[int(x):int(x + w), int(y):int(y + h)] == 1) > 10
+#END#

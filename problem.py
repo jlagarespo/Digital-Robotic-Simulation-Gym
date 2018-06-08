@@ -1,3 +1,4 @@
+# *********************************************************
 """
 Digital Robotic Simulation Gym Space
 Authors: Jacob Lagares and Sergi Valverde
@@ -41,8 +42,8 @@ obsPosY = problemH / 2
 agentPosX = 50
 agentPosY = 50
 
-sensorW = 12
-sensorH = 12
+sensorW = 70
+sensorH = 70
 step = 20
 
 # *********************************************************
@@ -185,4 +186,4 @@ while agent.alive():
 
 # call the "main" function if running this script
 if __name__ == '__main__': main(0)
-
+#END#

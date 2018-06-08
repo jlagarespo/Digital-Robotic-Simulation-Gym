@@ -116,3 +116,4 @@ class Obstacle(pygame.sprite.Sprite):
         return self.h
 
 # *********************************************************
+#END#

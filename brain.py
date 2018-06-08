@@ -1,5 +1,6 @@
 from agent import Agent
 import numpy as np
+import random as rand
 
 class Brain(Agent):
     """
@@ -71,8 +72,8 @@ class Brain(Agent):
         a square :(
 
         NW NN NE
-        WW -- EE
-        SW SS SE
+        SW AG SE
+        WW 00 EE
 
         We generate a mask with the following values, which be translated
         as the best orientation to follow:
@@ -84,7 +85,7 @@ class Brain(Agent):
 
         
         # build the orientation mask:
-        # NOTE: this should be built into a separated method and
+        # IMPORTANT NOTE: this should be built into a separated method and
         # only be called once :)
         sensor_mask = np.zeros_like(sensor_map)
         x_size = sensor_mask.shape[0]
@@ -106,6 +107,9 @@ class Brain(Agent):
         print(sensor_map)
         print(sensor_mask)
         # check the best orientation
+        # here us the center of the brain
+        # here is where you check what is your best possible direction to continue
+        # do changes here
         best_loss = np.Inf
         best_orientation = 0
         for i in range(8):
@@ -114,8 +118,11 @@ class Brain(Agent):
                 best_orientation = i
                 best_loss = loss
             print(loss)
+        
+        best_orientation = rand.randint(0, 8)
         print(best_orientation)
         print(best_loss)
         exit()
         return best_orientation
         
+#END#)
