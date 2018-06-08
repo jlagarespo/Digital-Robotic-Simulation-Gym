@@ -10,6 +10,7 @@ class Obstacle(pygame.sprite.Sprite):
     Obstacle. Needed to be avoided by the agent.
     Don't change it unless you want to change the problem to solve.
     """
+    
     images = []
     speed = 20
     bounce = 24

@@ -1,4 +1,9 @@
+# Digital Robotic Simulation Gym Space
+# Welcome to the code
+# Hope you enjoy! :)
+
 # *********************************************************
+
 """
 Digital Robotic Simulation Gym Space
 Authors: Jacob Lagares and Sergi Valverde
@@ -29,6 +34,11 @@ from obstacle import Obstacle as Obstacle
 from problemMap import ProblemMap as ProblemMap
 
 # *********************************************************
+# IMPLEMENTATION
+# *********************************************************
+
+# Main simulator constants
+
 # problem variables
 problemW = 1000
 problemH = 500

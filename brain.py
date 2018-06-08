@@ -10,6 +10,7 @@ class Brain(Agent):
     our navigation algorithms. See agent.py to see the available methods.
 
     """
+    
     def __init__(self, w, h, step):
         Agent.__init__(self, w, h, step)
         self.prev_orientation = 0

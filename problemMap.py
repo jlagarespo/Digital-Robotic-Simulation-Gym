@@ -6,6 +6,7 @@ class ProblemMap():
 
     The abstract map what determines where is what. Using a fragment of it as agent eyes.
     """
+
     def __init__(self):
         # Init stuff
         print("init map")

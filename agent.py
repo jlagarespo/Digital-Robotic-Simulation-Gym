@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 
-
 class Agent(pygame.sprite.Sprite):
     """
     Class Agent
@@ -11,6 +10,7 @@ class Agent(pygame.sprite.Sprite):
     Don't recommended to touch!
 
     """
+
     images = []
     speed = 20
     bounce = 24
