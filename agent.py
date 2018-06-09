@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+
 class Agent(pygame.sprite.Sprite):
     """
     Class Agent
@@ -115,9 +116,9 @@ class Agent(pygame.sprite.Sprite):
 
     def getPos(self):
         """
-        Gets the agent location
+        Gets the agent location (center of masses)
         """
-        return self.x, self.y
+        return int(self.x + self.w / 2), int(self.y + self.h / 2)
 
     def getSize(self):
         """
@@ -126,4 +127,4 @@ class Agent(pygame.sprite.Sprite):
         return self.w, self.h
 
 # *********************************************************
-#END#
+# END#
