@@ -13,6 +13,7 @@ class Brain(Agent):
     
     def __init__(self, w, h, step):
         Agent.__init__(self, w, h, step)
+        np.set_printoptions(threshold=np.nan)
         self.prev_orientation = 2
 
     # *********************************************************
