@@ -6,6 +6,10 @@
 https://www.python.org/
 * pygame
 https://www.pygame.org/
+* git
+https://git-scm.com/
+* numpy
+http://www.numpy.org/
 
 ###### Recomended:
 * Conda
@@ -35,10 +39,14 @@ python main.py
 Instead of running this command everytime you want to execute the program, you can just execute the "start.bat" file.
 
 Then, you should see something like this:
+
 ![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/main_window.png)
+
 Also your console, should look like this:
+
 ![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/console.png)
-If you see it, sucsses! Your done it; now you can start creating your own agent behaviours and experimenting by yourself.
+
+If it does, sucsses! Your done it; now you can start creating your own agent behaviours and experimenting by yourself.
 ________________________________________________________________________________
 #### Common issues
 If you get this output:
@@ -72,16 +80,8 @@ When you want to make changes to the code for changing the behaviour of the prog
 
     -Also, is not recomended to change the "draw" methods, because he is the ones what draw stuff on the screen.
 
-Then you need to know what there is a few main classes:
-##### The problem.py class
-Contains the problem to resolve, and the object creation
+For creating your own behaviours, you should go to the brain.py class, in where the documentation already explains how to use it.
 
-#### For the obstacle.py
-Is the obstacle not recommended to change it.
-
-#### For making changes on the agent.py
-Use the Player class methods of movement and obstacle detection to controll the behaviour of the robot what you can write inside this class.
-*More info going to be here**
 
 ### Thank you for looking here around! We hope you enjoy this! :)
 
