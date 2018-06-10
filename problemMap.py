@@ -1,10 +1,12 @@
 import numpy as np
 
+
 class ProblemMap():
     """
     Class Map
 
-    The abstract map what determines where is what. Using a fragment of it as agent eyes.
+    The abstract map what determines where is what. Using a
+    fragment of it as agent eyes.
     """
 
     def __init__(self):
@@ -16,7 +18,7 @@ class ProblemMap():
         self.map = None
 
 # *********************************************************
-    
+
     def setMapSize(self, w, h):
         '''
         Generate a zero map with of size w, h.
@@ -29,7 +31,7 @@ class ProblemMap():
         # set a full map
         self.map = np.ones((w, h))
         # fill interior with zeros
-        self.map[1:w - 1, 1:h - 1] = 0
+        self.map[5:w - 5, 5:h - 5] = 0
         # print(self.map.shape)
 
     def setObstacle(self, x, y, w, h):
@@ -46,7 +48,6 @@ class ProblemMap():
         """
         return self.map[int(x):int(x + w), int(y):int(y + h)]
 
-
     def getSize(self):
         return self.w, self.h
 
@@ -56,9 +57,9 @@ class ProblemMap():
         Return True if the agent is overlapping one of
         the defined obstacles and False otherwise
 
-        x, y, w and h are the agent coordenates and size,
-        respectively.
+        x, y, w and h are the agent coordenates (center of masses)
+        and size, respectively.
         """
 
-        return np.sum(self.map[int(x):int(x + w), int(y):int(y + h)] == 1) > min_res
-#END#
+        return np.sum(self.map[int(x - w/2):int(x + w/2),
+                               int(y - h/2):int(y + h/2)] == 1) > min_res

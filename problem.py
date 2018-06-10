@@ -36,7 +36,6 @@ import pygame
 import numpy as np
 
 from pygame.locals import *
-
 from brain import Brain as Agent
 from obstacle import Obstacle as Obstacle
 from problemMap import ProblemMap as ProblemMap
@@ -50,8 +49,8 @@ from problemMap import ProblemMap as ProblemMap
 # Main simulator constants
 
 # problem variables
-problemW = 1000
-problemH = 500
+problemW = 400
+problemH = 400
 framerate = 10
 
 # obstacle
@@ -59,11 +58,11 @@ obsPosX = problemW / 2
 obsPosY = problemH / 2
 
 # agent
-agentPosX = 100
-agentPosY = problemH / 2
+agentPosX = np.random.randint(0, problemW)
+agentPosY = np.random.randint(0, problemH)
 
-sensorW = 60
-sensorH = 60
+sensorW = 30
+sensorH = 30
 step = 5
 
 # *********************************************************
@@ -220,6 +219,10 @@ print(mp.getSize())
 
 agent_w, agent_h = agent.getSize()
 
+print("--------------------------------------------------")
+print("AGENT POS:", agent.getPos())
+print("SENSOR POS:")
+print("--------------------------------------------------")
 print(agent_w, agent_h)
 
 if agent_w > sensorW:
@@ -240,7 +243,10 @@ while agent.alive():
 
     # get current state
     agentPosX, agentPosY = agent.getPos()
-    sensor_info = mp.getMap(agentPosX - sensorW / 2, agentPosY - sensorH / 2, sensorW, sensorH)
+    sensor_info = mp.getMap(agentPosX - sensorW / 2,
+                            agentPosY - sensorH / 2,
+                            sensorW,
+                            sensorH)
 
     # evaluate the agent position
     # if the agent is touching one of the obstacles, stop
