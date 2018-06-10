@@ -81,7 +81,11 @@ When you want to make changes to the code for changing the behaviour of the prog
     -Also, is not recomended to change the "draw" methods, because he is the ones what draw stuff on the screen.
 
 For creating your own behaviours, you should go to the brain.py class, in where the documentation already explains how to use it.
+![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/brain.png)
 
+Also for changing the main problem parameters, you should change the main simulation constants at the start of the problem.py
+
+![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/brain.png)
 
 ### Thank you for looking here around! We hope you enjoy this! :)
 
