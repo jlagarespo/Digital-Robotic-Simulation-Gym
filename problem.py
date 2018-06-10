@@ -222,7 +222,7 @@ agent_w, agent_h = agent.getSize()
 
 print("--------------------------------------------------")
 print("AGENT POS:", agent.getPos())
-print("SENSOR POS:")
+print("SENSOR POS:", sensorW, sensorH)
 print("--------------------------------------------------")
 print(agent_w, agent_h)
 
@@ -292,7 +292,7 @@ while agent.alive():
 
                 #Reset game
                 print("reset")
-
+        
 
 
 # *********************************************************

@@ -1,5 +1,6 @@
 from agent import Agent
 import numpy as np
+import pygame
 
 
 class Brain(Agent):
@@ -14,7 +15,7 @@ class Brain(Agent):
     def __init__(self, w, h, step):
         Agent.__init__(self, w, h, step)
         np.set_printoptions(threshold=np.nan)
-        self.prev_orientation = 2
+        self.prev_orientation = np.random.randint(1, 9)
 
     # *********************************************************
     # Behaviour controller
@@ -41,7 +42,7 @@ class Brain(Agent):
             print('ORIENT:', next_orientation)
             print("obstacle direction", dir[next_orientation-1])
             self.prev_orientation = next_orientation
-            step = 30
+            step = 10
 
         # move the agent
         self.move_agent(next_orientation, step)
