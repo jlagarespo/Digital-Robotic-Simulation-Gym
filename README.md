@@ -85,7 +85,22 @@ For creating your own behaviours, you should go to the brain.py class, in where 
 
 Also for changing the main problem parameters, you should change the main simulation constants at the start of the problem.py
 
-![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/brain.png)
+![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/problem.png)
+
+For changing other stuff in the main code of the simulation you can follow the comments, the instructions are sufficiently clear :P
+
+________________________________________________________________________________
+
+#### Algorythm examples
+The main code is in the main folder, but in the examples folder, 
+there is some example algorythms(example brain and problem classes).
+
+##### The stupid agent
+Is in the examples folder. Its an what when founds an obstacle, goes in the other directions
+
+#### Remember we always are updating brand new algorythms!
+
+________________________________________________________________________________
 
 ### Thank you for looking here around! We hope you enjoy this! :)
 
