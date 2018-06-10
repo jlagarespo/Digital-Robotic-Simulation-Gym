@@ -36,6 +36,7 @@ import pygame
 import numpy as np
 
 from pygame.locals import *
+from agent import Agent as AgentUtils
 from brain import Brain as Agent
 from obstacle import Obstacle as Obstacle
 from problemMap import ProblemMap as ProblemMap
