@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 
-
 class Agent(pygame.sprite.Sprite):
     """
     Class Agent

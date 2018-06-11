@@ -1,7 +1,13 @@
 # Digital Robotic Simulation Gym Space
 ## A microcontroller simulator inside the computer in python
 
+<<<<<<< HEAD
 Programation workflow language: *Python
+=======
+![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/python.png)
+
+Programming workflow language: *Python
+>>>>>>> 3fa87b412d263d44eecfd6c2feb70c05b6c19fb6
 
 ###### Requeriments:
 * Python 3.6
@@ -29,11 +35,18 @@ ________________________________________________________________________________
 ## stuff what needs to be writed by the notes we have in the real world
 ________________________________________________________________________________
 #### How to install and use it
-First you need to clone the repository into your computer.
-For doing that, you can execute this command:
+First things first, you need to install everything.
+First execute this:
+```batch
+cd "installation folder"
+```
+In the first argument, put the directory you want everything yo install.
+The execute this other command:
 ```batch
 git clone https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym.git
 ```
+Congrats! You installed it!
+
 Then to run the following command to run the program:
 ```batch
 python main.py
@@ -51,20 +64,20 @@ Also your console, should look like this:
 If it does, sucsses! Your done it; now you can start creating your own agent behaviours and experimenting by yourself.
 ________________________________________________________________________________
 #### Common issues
-If you get this output:
+* If you get this output:
 ```
 Sorry, extended image module required
 ```
 Make sure you have an extension to load more than a standart Bitmap.
-/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-Also, if something goes wrong, make sure you don't have this message:
+
+* Also, if something goes wrong, make sure you don't have this message:
 ```
 Could not load image "image"
 ```
 Make sure the "image" exists.
 Recomended to re-clone the repository in this case.
-/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-If no sound is playing, is possible to be because:
+
+* If no sound is playing, is possible to be because:
 ```
 Warnign, no sound
 ```
