@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class ProblemMap():
     """
     Class Map
