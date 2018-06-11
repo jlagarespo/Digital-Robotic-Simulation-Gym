@@ -27,11 +27,18 @@ ________________________________________________________________________________
 ## stuff what needs to be writed by the notes we have in the real world
 ________________________________________________________________________________
 #### How to install and use it
-First you need to clone the repository into your computer.
-For doing that, you can execute this command:
+First things first, you need to install everything.
+First execute this:
+```batch
+cd "installation folder"
+```
+In the first argument, put the directory you want everything yo install.
+The execute this other command:
 ```batch
 git clone https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym.git
 ```
+Congrats! You installed it!
+
 Then to run the following command to run the program:
 ```batch
 python main.py
