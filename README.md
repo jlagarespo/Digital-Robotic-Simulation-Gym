@@ -1,13 +1,11 @@
 # Digital Robotic Simulation Gym Space
 ## A microcontroller simulator inside the computer in python
 
-<<<<<<< HEAD
 Programation workflow language: *Python
-=======
+
 ![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/python.png)
 
 Programming workflow language: *Python
->>>>>>> 3fa87b412d263d44eecfd6c2feb70c05b6c19fb6
 
 ###### Requeriments:
 * Python 3.6
