@@ -124,6 +124,8 @@ class Brain(Agent):
         positions
         """
 
+        # move stuff
+
         if orientation == 1:
             self.moveUp(step)
             self.moveLeft(step)
