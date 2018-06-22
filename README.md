@@ -5,7 +5,7 @@ Programation workflow language: *Python*
 
 ![alt text](https://github.com/jlagarespo/Digital-Robotic-Simulation-Gym/blob/master/data/python.png)
 
-Programming workflow language: *Python
+Programming workflow language: *Python*
 
 ###### Requeriments:
 * Python 3.6
