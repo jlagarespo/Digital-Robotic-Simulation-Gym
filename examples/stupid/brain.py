@@ -15,13 +15,15 @@ class Brain(Agent):
     def __init__(self, w, h, step):
         Agent.__init__(self, w, h, step)
         np.set_printoptions(threshold=np.nan)
+
         self.prev_orientation = np.random.randint(1, 9)
+        self.prev_movements = [0, 0]
 
     # *********************************************************
-    # Behaviour controller
+    # Behaviour controller  
     # *********************************************************
 
-    def nextState(self):
+    def nextState(self, speed):
         """
         Here is where magic happens
 
@@ -35,14 +37,18 @@ class Brain(Agent):
 
         if np.sum(sensor_data) == 0:
             next_orientation = self.prev_orientation
-            step = 5
+            step = speed
         else:
             max_loss = self.get_orientation_loss(sensor_data)
             next_orientation = self.get_next_orientation(max_loss)
+            print(next_orientation)
+            # checking if agent is in a loopa
+            next_orientation = self.apply_random_dir()
+            print(next_orientation)
             print('ORIENT:', next_orientation)
-            print("obstacle direction", dir[next_orientation-1])
+            print("obstacle direction", dir[next_orientation - 1])
             self.prev_orientation = next_orientation
-            step = 10
+            step = speed
 
         # move the agent
         self.move_agent(next_orientation, step)
@@ -64,6 +70,8 @@ class Brain(Agent):
         SS = 7 and SE = 8
 
         """
+
+        print("debug")
 
         # build the orientation mask:
         # IMPORTANT NOTE: this should be built into a separated method and
@@ -89,27 +97,33 @@ class Brain(Agent):
         losses = np.array([np.sum(sensor_map * (sensor_mask == i))
                            for i in range(1, 9)])
         max_loss = np.where(losses == np.max(losses))[0]
-        print(losses, max_loss)
+        print(losses[0:3])
+        print([losses[3], " ", losses[4]])
+        print(losses[5:8])
 
         # only 1,2 or 3 directions can be detected at the same time
         # given the kind of sensor and the orientations employed.
         # if 2, 3 directions are detected, return the central one
+
         orientation = max_loss if len(max_loss) == 1 else max_loss[1]
         return orientation + 1
 
     def get_next_orientation(self, max_loss_direction):
         """
-        return the opposite direction
+        Return the opposite direction
         """
 
-        return abs(max_loss_direction - 8) + 1
+        next_orientation = abs(max_loss_direction - 8) + 1
+        self.prev_movements.append(next_orientation)
+
+        return next_orientation
 
     def move_agent(self, orientation, step):
         """
         Move the agent taking into account each of the 8 possible
         positions
-
         """
+
         if orientation == 1:
             self.moveUp(step)
             self.moveLeft(step)
@@ -130,3 +144,16 @@ class Brain(Agent):
         if orientation == 8:
             self.moveDown(step)
             self.moveRight(step)
+
+    def apply_random_dir(self):
+        """
+
+        """
+
+        last_dir = int(self.prev_movements[-1])
+
+        if abs(last_dir - 8) + 1 == self.prev_movements[-2]:
+            last_dir = last_dir - np.random.choice([-1, 1])
+
+        return last_dir
+        

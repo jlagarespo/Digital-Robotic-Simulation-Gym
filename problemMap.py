@@ -33,11 +33,19 @@ class ProblemMap():
         self.map[5:w - 5, 5:h - 5] = 0
         # print(self.map.shape)
 
+        self.goal_id = 5
+
     def setObstacle(self, x, y, w, h):
         """
         Sets obstacle location in the map
         """
         self.map[int(x):int(x + w), int(y):int(y + h)] = 1
+
+    def setGoal(self, x, y, w, h):
+        """
+        Sets obstacle location in the map
+        """
+        self.map[int(x):int(x + w), int(y):int(y + h)] = self.goal_id
 
     def getMap(self, x, y, w, h):
         """
@@ -60,5 +68,20 @@ class ProblemMap():
         and size, respectively.
         """
 
-        return np.sum(self.map[int(x - w/2):int(x + w/2),
-                               int(y - h/2):int(y + h/2)] == 1) > min_res
+        next_map = np.sum(self.map[int(x - w/2):int(x + w/2),
+                               int(y - h/2):int(y + h/2)] == 1)
+    
+        return next_map > min_res
+
+    def evaluate_goal(self, x, y, w, h):
+        """
+        !!to doc
+        """
+
+        next_map = self.map[int(x - w/2):int(x + w/2),
+                               int(y - h/2):int(y + h/2)]
+
+        
+        print(next_map)
+    
+        return self.goal_id in next_map

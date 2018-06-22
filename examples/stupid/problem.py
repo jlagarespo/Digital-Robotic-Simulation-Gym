@@ -2,7 +2,7 @@
 
 # Digital Robotic Simulation Gym Space
 # Welcome to the code
-# Hope you enjoy! :)
+# Hope you enjoy! :D
 
 # *********************************************************
 
@@ -37,6 +37,7 @@ from pygame.locals import *
 from brain import Brain as Agent
 from obstacle import Obstacle as Obstacle
 from problemMap import ProblemMap as ProblemMap
+from goal import Goal as Goal
 
 # *********************************************************
 # IMPLEMENTATION
@@ -49,15 +50,19 @@ problemH = 400
 framerate = 10
 
 # the number of obstacles can be set
-NUM_OBSTACLES = 3
+NUM_OBSTACLES = 5
 
 # agent
 agentPosX = np.random.randint(0, problemW)
 agentPosY = np.random.randint(0, problemH)
 
-sensorW = 30
-sensorH = 30
-step = 5
+sensorW = 50
+sensorH = 50
+speed = 5
+
+#goal
+goalX = problemW / 2
+goalY = problemH / 2
 
 # *********************************************************
 
@@ -105,6 +110,7 @@ def load_images(*files):
     return imgs
 
 # *********************************************************
+
 # Initialize pygame
 pygame.init()
 
@@ -117,9 +123,11 @@ screen = pygame.display.set_mode(SCREENRECT.size, winstyle, bestdepth)
 # (do this before the classes are used, after screen setup)
 img = load_image('player1.gif')
 imgObstacle = load_image('obstacle.png')
+imgGoal = load_image("goal.png")
 # imgGoal = load_image('obstacle.png')
 Agent.images = [img, pygame.transform.flip(img, 1, 0)]
 Obstacle.images = [imgObstacle, pygame.transform.flip(img, 1, 0)]
+Goal.images = [imgGoal, pygame.transform.flip(img, 1, 0)]
 
 # decorate the game window
 icon = pygame.transform.scale(Agent.images[0], (32, 32))
@@ -131,21 +139,10 @@ pygame.mouse.set_visible(0)
 bgdtile = load_image('background.gif')
 background = pygame.Surface(SCREENRECT.size)
 
-
-
-# *********************************************************
-
-
-
 # Render the background
 for x in range(0, SCREENRECT.width, bgdtile.get_width()):
-
-
     for y in range(0, SCREENRECT.height, bgdtile.get_height()):
-
-
         background.blit(bgdtile, (x, y))
-
 
 # Blit the background
 screen.blit(background, (0, 0))
@@ -155,15 +152,21 @@ pygame.display.flip()
 all = pygame.sprite.RenderUpdates()
 Agent.containers = all
 Obstacle.containers = all
+Goal.containers = all
 
-agent = Agent(sensorW, sensorH, step)
-
-# generate obstacles and assign them to random positions
-obstacles = [Obstacle() for obs in range(NUM_OBSTACLES)]
+agent = Agent(sensorW, sensorH, speed)
 
 # generate the map
 mp = ProblemMap()
 mp.setMapSize(SCREENRECT.width, SCREENRECT.height)
+
+# generate obstacles and assign them to random positions
+obstacles = [Obstacle() for obs in range(NUM_OBSTACLES)]
+
+# set goal
+goal = Goal()
+goal.setPos(goalX, goalY, 50, 50)
+mp.setGoal(goalX, goalY, 50, 50)
 
 # assign positions to obstacles and add them to the map
 for obs in obstacles:
@@ -204,13 +207,17 @@ if agent_h > sensorH:
 # *********************************************************
 
 while agent.alive():
-
     # get current state
     agentPosX, agentPosY = agent.getPos()
     sensor_info = mp.getMap(agentPosX - sensorW / 2,
                             agentPosY - sensorH / 2,
                             sensorW,
                             sensorH)
+
+    if mp.evaluate_goal(agentPosX, agentPosY, agent_w, agent_h):
+        print("PARTYYYY :D")
+        pygame.time.wait(2000)
+        pygame.quit()
 
     # evaluate the agent position
     # if the agent is touching one of the obstacles, stop
@@ -221,7 +228,7 @@ while agent.alive():
         pygame.quit()
     else:
         agent.getSensor(sensor_info)
-        agent.nextState()
+        agent.nextState(speed)
 
     # update all the sprites and draw the scene
     all.clear(screen, background)
