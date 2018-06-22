@@ -27,14 +27,13 @@ ESC    - exit
 R      - reset everything
 """
 
+import sys
+sys.path.insert(0, "../../")
+
 import os.path
 import pygame
 import numpy as np
 from pygame.locals import *
-import sys
-sys.path.insert(0, "../../")
-
-from agent import Agent as AgentUtils
 from brain import Brain as Agent
 from obstacle import Obstacle as Obstacle
 from problemMap import ProblemMap as ProblemMap
@@ -49,9 +48,8 @@ problemW = 400
 problemH = 400
 framerate = 10
 
-# obstacle
-obsPosX = problemW / 2
-obsPosY = problemH / 2
+# the number of obstacles can be set
+NUM_OBSTACLES = 3
 
 # agent
 agentPosX = np.random.randint(0, problemW)
@@ -100,18 +98,11 @@ def load_images(*files):
     """
 
     print("Loading every: " + files + " images")
-
-
     imgs = []
-
-
     for file in files:
-
         imgs.append(load_image(file))
 
     return imgs
-
-
 
 # *********************************************************
 # Initialize pygame
@@ -122,15 +113,13 @@ winstyle = 0  # FULLSCREEN
 bestdepth = pygame.display.mode_ok(SCREENRECT.size, winstyle, 32)
 screen = pygame.display.set_mode(SCREENRECT.size, winstyle, bestdepth)
 
-
-
 # Load images, assign to sprite classes
 # (do this before the classes are used, after screen setup)
 img = load_image('player1.gif')
-imgObstacle = load_image('chimp.bmp')
+imgObstacle = load_image('obstacle.png')
+# imgGoal = load_image('obstacle.png')
 Agent.images = [img, pygame.transform.flip(img, 1, 0)]
 Obstacle.images = [imgObstacle, pygame.transform.flip(img, 1, 0)]
-
 
 # decorate the game window
 icon = pygame.transform.scale(Agent.images[0], (32, 32))
@@ -168,18 +157,25 @@ Agent.containers = all
 Obstacle.containers = all
 
 agent = Agent(sensorW, sensorH, step)
-obstacle = Obstacle()
-mp = ProblemMap()
-agent.setPos(agentPosX, agentPosY, 10, 10)
-obstacle.setPos(obsPosX, obsPosY, 10, 10)
 
-x, y = obstacle.getX(), obstacle.getY()
+# generate obstacles and assign them to random positions
+obstacles = [Obstacle() for obs in range(NUM_OBSTACLES)]
+
+# generate the map
+mp = ProblemMap()
 mp.setMapSize(SCREENRECT.width, SCREENRECT.height)
-mp.setObstacle(obstacle.getX(),
-               obstacle.getY(),
-               obstacle.getW(),
-               obstacle.getH())
-print(mp.getSize())
+
+# assign positions to obstacles and add them to the map
+for obs in obstacles:
+    x_pos = np.random.randint(0, problemW)
+    y_pos = np.random.randint(0, problemH)
+    obs.setPos(x_pos, y_pos, 10, 10)
+    mp.setObstacle(obs.getX(),
+                   obs.getY(),
+                   obs.getW(),
+                   obs.getH())
+
+agent.setPos(agentPosX, agentPosY, 10, 10)
 
 # the agent is iteratively asking for a new position
 # while it's finding the goal. If it touches an obstacle
