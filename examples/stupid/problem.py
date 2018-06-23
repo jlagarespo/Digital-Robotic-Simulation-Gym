@@ -38,6 +38,7 @@ from brain import Brain as Agent
 from obstacle import Obstacle as Obstacle
 from problemMap import ProblemMap as ProblemMap
 from goal import Goal as Goal
+from PIL import Image
 
 # *********************************************************
 # IMPLEMENTATION
@@ -205,6 +206,15 @@ if agent_h > sensorH:
     exit()
 
 # *********************************************************
+
+# save map as bitmap
+data = mp.getMap(0, 0, problemW, problemH)
+
+dataRGB = np.stack([data, np.zeros_like(data), data], axis=2)
+
+img = Image.fromarray(dataRGB.astype("uint8") * 255, "RGB")
+img.save("map.png")
+img.show()
 
 while agent.alive():
     # get current state
