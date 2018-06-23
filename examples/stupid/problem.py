@@ -43,6 +43,7 @@ from PIL import Image
 # *********************************************************
 # IMPLEMENTATION
 # *********************************************************
+
 # Main simulator constants
 
 # problem variables
@@ -79,7 +80,6 @@ clock = pygame.time.Clock()
 # see if we can load more than standard BMP
 if not pygame.image.get_extended():
     raise SystemExit("Sorry, extended image module required")
-# *********************************************************
 
 
 def load_image(file):
@@ -109,8 +109,6 @@ def load_images(*files):
         imgs.append(load_image(file))
 
     return imgs
-
-# *********************************************************
 
 # Initialize pygame
 pygame.init()
@@ -194,18 +192,12 @@ print("--------------------------------------------------")
 print(agent_w, agent_h)
 
 if agent_w > sensorW:
-
     print("Agent too big!")
-
     exit()
 
 if agent_h > sensorH:
-
     print("Agent too big!")
-
     exit()
-
-# *********************************************************
 
 # save map as bitmap
 data = mp.getMap(0, 0, problemW, problemH)
@@ -257,3 +249,5 @@ while agent.alive():
             if event.key == K_r:
                 # Reset game
                 print("reset")
+
+# END

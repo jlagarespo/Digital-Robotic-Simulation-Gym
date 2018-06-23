@@ -16,8 +16,6 @@ class Obstacle(pygame.sprite.Sprite):
     bounce = 24
     gun_offset = -11
 
-# *********************************************************
-
     def __init__(self):
         #Init stuff
         pygame.sprite.Sprite.__init__(self, self.containers)
@@ -33,8 +31,6 @@ class Obstacle(pygame.sprite.Sprite):
         self.origtop = self.rect.top
         self.facing = -1
 
-# *********************************************************
-
     def draw(self, direction):
         """
         Draw the obstacle
@@ -49,8 +45,6 @@ class Obstacle(pygame.sprite.Sprite):
         elif direction > 0:
             self.image = self.images[1]
         self.rect.top = self.origtop - (self.rect.left//self.bounce%2)
-
-# *********************************************************
 
     def setPos(self, x, y, w, h):
         """
@@ -90,8 +84,6 @@ class Obstacle(pygame.sprite.Sprite):
         """
         self.setPos(self.x + increment, self.y, self.w, self.h)
 
-# *********************************************************
-
     def getX(self):
         """
         Get obstacle X location
@@ -116,5 +108,4 @@ class Obstacle(pygame.sprite.Sprite):
         """
         return self.h
 
-# *********************************************************
-#END#
+# END

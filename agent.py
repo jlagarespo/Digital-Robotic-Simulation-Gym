@@ -16,8 +16,6 @@ class Agent(pygame.sprite.Sprite):
     bounce = 24
     gun_offset = -11
 
-# *********************************************************
-
     def __init__(self, sensorW, sensorH, step):
         # Init stuff
         pygame.sprite.Sprite.__init__(self, self.containers)
@@ -38,8 +36,6 @@ class Agent(pygame.sprite.Sprite):
         self.step = step
         print(self.w, self.h)
 
-# *********************************************************
-
     def move(self, direction):
         """
         Update the player location and iterate properties
@@ -54,8 +50,6 @@ class Agent(pygame.sprite.Sprite):
             self.image = self.images[1]
         self.rect.top = self.origtop - (self.rect.left//self.bounce % 2)
 
-# *********************************************************
-
     def setPos(self, x, y, w, h):
         """
         Sets player position
@@ -69,8 +63,6 @@ class Agent(pygame.sprite.Sprite):
         self.y = y
         self.w = w
         self.h = h
-
-# *********************************************************
 
     def moveUp(self, increment):
         """
@@ -96,8 +88,6 @@ class Agent(pygame.sprite.Sprite):
         """
         self.setPos(self.x + increment, self.y, self.w, self.h)
 
-# *********************************************************
-
     def getSensor(self, data):
         """
         Loads the sensor data into the agent class
@@ -111,8 +101,6 @@ class Agent(pygame.sprite.Sprite):
         """
         return self.sensorW, self.sensorH
 
-# *********************************************************
-
     def getPos(self):
         """
         Gets the agent location (center of masses)
@@ -125,5 +113,4 @@ class Agent(pygame.sprite.Sprite):
         """
         return self.w, self.h
 
-# *********************************************************
-# END#
+# END

@@ -16,8 +16,6 @@ class ProblemMap():
 
         self.map = None
 
-# *********************************************************
-
     def setMapSize(self, w, h):
         '''
         Generate a zero map with of size w, h.
