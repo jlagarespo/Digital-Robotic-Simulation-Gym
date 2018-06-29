@@ -2,7 +2,6 @@ from agent import Agent
 import numpy as np
 import pygame
 
-
 class Brain(Agent):
     """
     Class Brain
