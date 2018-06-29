@@ -49,7 +49,7 @@ from PIL import Image
 # Main simulator constants
 
 # problem variables
-problemW = 400
+problemW = 600
 problemH = 400
 framerate = 10
 
@@ -57,16 +57,18 @@ framerate = 10
 NUM_OBSTACLES = 5
 
 # agent
-agentPosX = np.random.randint(0, problemW)
-agentPosY = np.random.randint(0, problemH)
+# inverting x and y with w and h because np uses cols and rows system
+agentPosR = np.random.randint(0, problemH)
+agentPosC = np.random.randint(0, problemW)
 
 sensorW = 50
 sensorH = 50
 speed = 5
 
-#goal
-goalX = problemW / 2
-goalY = problemH / 2
+# goal
+# same as the agent definition
+goalR = problemH / 2
+goalC = problemW / 2
 
 # *********************************************************
 
@@ -166,8 +168,8 @@ obstacles = [Obstacle() for obs in range(NUM_OBSTACLES)]
 
 # set goal
 goal = Goal()
-goal.setPos(goalX, goalY, 50, 50)
-mp.setGoal(goalX, goalY, 50, 50)
+goal.setPos(goalR, goalC, 50, 50)
+mp.setGoal(goalR, goalC, 50, 50)
 
 # assign positions to obstacles and add them to the map
 for obs in obstacles:
@@ -179,30 +181,31 @@ for obs in obstacles:
                    obs.getW(),
                    obs.getH())
 
-agent.setPos(agentPosX, agentPosY, 10, 10)
+agent.setPos(agentPosR, agentPosC, 10, 10)
 
 # the agent is iteratively asking for a new position
 # while it's finding the goal. If it touches an obstacle
 # the game is finished
 
-agent_w, agent_h = agent.getSize()
+agent_r, agent_c = agent.getSize()
 
 print("--------------------------------------------------")
 print("AGENT POS:", agent.getPos())
 print("SENSOR POS:", sensorW, sensorH)
 print("--------------------------------------------------")
-print(agent_w, agent_h)
+print(agent_r, agent_c)
 
-if agent_w > sensorW:
+if agent_r > sensorW:
     print("Agent too big!")
     exit()
 
-if agent_h > sensorH:
+if agent_c > sensorH:
     print("Agent too big!")
     exit()
 
 # save map as bitmap
 data = mp.getMap(0, 0, problemW, problemH)
+print(data.shape)
 
 dataRGB = np.stack([data, np.zeros_like(data), data], axis=2)
 
@@ -212,21 +215,21 @@ img.show()
 
 while agent.alive():
     # get current state
-    agentPosX, agentPosY = agent.getPos()
-    sensor_info = mp.getMap(agentPosX - sensorW / 2,
-                            agentPosY - sensorH / 2,
+    agentPosR, agentPosC = agent.getPos()
+    sensor_info = mp.getMap(agentPosR - sensorW / 2,
+                            agentPosC - sensorH / 2,
                             sensorW,
                             sensorH)
 
-    if mp.evaluate_goal(agentPosX, agentPosY, agent_w, agent_h):
+    if mp.evaluate_goal(agentPosR, agentPosC, agent_r, agent_c):
         print("PARTYYYY :D")
         pygame.time.wait(2000)
         pygame.quit()
 
     # evaluate the agent position
-    # if the agent is touching one of the obstacles, stop
+    # if the agent is touching one of the obstacles, 
     # the problem. If still alive, get sensory information and move
-    if mp.evaluate_map(agentPosX, agentPosY, agent_w, agent_h, 5):
+    if mp.evaluate_map(agentPosR, agentPosC, agent_r, agent_c, 5):
         print("Agent messed up :(")
         pygame.time.wait(2000)
         pygame.quit()

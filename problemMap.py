@@ -26,9 +26,9 @@ class ProblemMap():
         self.h = h
 
         # set a full map
-        self.map = np.ones((w, h))
+        self.map = np.ones((h, w))
         # fill interior with zeros
-        self.map[5:w - 5, 5:h - 5] = 0
+        self.map[5:h - 5, 5:w - 5] = 0
         # print(self.map.shape)
 
         self.goal_id = 5
@@ -37,13 +37,13 @@ class ProblemMap():
         """
         Sets obstacle location in the map
         """
-        self.map[int(x):int(x + w), int(y):int(y + h)] = 1
+        self.map[int(y):int(y + h), int(x):int(x + w)] = 1
 
     def setGoal(self, x, y, w, h):
         """
         Sets obstacle location in the map
         """
-        self.map[int(x):int(x + w), int(y):int(y + h)] = self.goal_id
+        self.map[int(y):int(y + h), int(x):int(x + w)] = self.goal_id
 
     def getMap(self, x, y, w, h):
         """
@@ -51,7 +51,7 @@ class ProblemMap():
         system. The reference system is taken from the center of the
         agent
         """
-        return self.map[int(x):int(x + w), int(y):int(y + h)]
+        return self.map[int(x):int(x + h), int(y):int(y + w)]
 
     def getSize(self):
         return self.w, self.h
@@ -66,8 +66,8 @@ class ProblemMap():
         and size, respectively.
         """
 
-        next_map = np.sum(self.map[int(x - w/2):int(x + w/2),
-                               int(y - h/2):int(y + h/2)] == 1)
+        next_map = np.sum(self.map[int(x - h/2):int(x + h/2),
+                               int(y - w/2):int(y + w/2)] == 1)
     
         return next_map > min_res
 
@@ -76,8 +76,8 @@ class ProblemMap():
         !!to doc
         """
 
-        next_map = self.map[int(x - w/2):int(x + w/2),
-                               int(y - h/2):int(y + h/2)]
+        next_map = self.map[int(x - h/2):int(x + h/2),
+                               int(y - w/2):int(y + w/2)]
 
         
         print(next_map)
