@@ -9,3 +9,5 @@ print("Input the name of the model you want to run> ")
 a = input()
 call(["cd", path + "/models/" + a + "/"])
 call(["python", ("/problem.py")])
+
+print("session end")
