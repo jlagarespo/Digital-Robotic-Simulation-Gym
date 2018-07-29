@@ -1,1 +1,2 @@
-python problem.py
+@echo starting run.py
+@python run.py
